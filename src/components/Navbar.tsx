@@ -1,4 +1,4 @@
-export function Navbar({ whatsappUrl }: { whatsappUrl: string }) {
+export function Navbar() {
   return (
     <nav className="fixed w-full top-0 bg-slate-900/90 backdrop-blur-md z-50 border-b border-slate-800">
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">

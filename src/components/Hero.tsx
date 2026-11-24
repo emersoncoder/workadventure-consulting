@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 
-export function Hero({ whatsappUrl }: { whatsappUrl: string }) {
+export function Hero() {
   return (
     <main id="inicio" className="flex items-start pt-24 pb-4 px-6">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-start w-full">

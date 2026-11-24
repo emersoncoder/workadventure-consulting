@@ -1,6 +1,10 @@
-import { motion } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
+import { useRef } from 'react';
 
 export function Servicos() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
   const servicos = [
     { icon: "⚙️", title: "Setup e Hospedagem", desc: "Configuração completa do servidor Self-hosted, garantindo estabilidade e segurança." },
     { icon: "🎨", title: "Customização de Mapas", desc: "Criação de mapas Tiled com a sua identidade visual, spots interativos e integrações." },
@@ -8,7 +12,7 @@ export function Servicos() {
   ];
 
   return (
-    <section id="servicos" className="py-24 bg-slate-950 border-y border-slate-800">
+    <section id="servicos" className="py-24 bg-slate-950 border-y border-slate-800" ref={ref}>
       <div className="max-w-6xl mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-bold mb-4">Meus Serviços</h2>
@@ -19,8 +23,7 @@ export function Servicos() {
             <motion.div 
               key={i}
               initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 0.5, delay: i * 0.2 }}
               className="bg-slate-900 p-8 rounded-2xl border border-slate-800 hover:border-amber-500/50 transition-all group"
             >

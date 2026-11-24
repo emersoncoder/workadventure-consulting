@@ -1,11 +1,12 @@
 import { useState, useRef } from 'react';
 import emailjs from '@emailjs/browser';
 
-export function Contato({ whatsappUrl }: { whatsappUrl: string }) {
+export function Contato() {
   const form = useRef<HTMLFormElement>(null);
   const [isSending, setIsSending] = useState(false);
   const [sendStatus, setSendStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
+  // Usando as variáveis de ambiente configuradas na Cloudflare
   const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
   const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
   const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;

@@ -1,6 +1,10 @@
-import { motion } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
+import { useRef } from 'react';
 
 export function Sobre() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
   const skills = [
     "AWS & Cloud", "Full Stack", "Arquitetura", "Segurança", "DevOps & CI/CD", 
     "Docker & K8s", "Clean Code", "IA & ML", "Software Livre", "Linux & BSD", 
@@ -8,11 +12,10 @@ export function Sobre() {
   ];
 
   return (
-    <section className="pt-4 pb-16 px-6 max-w-7xl mx-auto">
+    <section className="pt-4 pb-16 px-6 max-w-7xl mx-auto" ref={ref}>
       <motion.div 
         initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
+        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
         transition={{ duration: 0.6 }}
         className="bg-slate-950/50 p-8 md:p-12 rounded-3xl border border-slate-800/80 shadow-2xl"
       >

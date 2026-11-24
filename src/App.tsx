@@ -14,19 +14,13 @@ function App() {
   return (
     <div className="min-h-screen bg-slate-900 text-slate-100 font-sans selection:bg-amber-500 selection:text-white relative scroll-smooth">
       
-      <Navbar whatsappUrl={whatsappUrl} />
-      
-      <Hero whatsappUrl={whatsappUrl} />
-      
+      <Navbar />
+      <Hero />
       <Sobre />
-      
       <Servicos />
-      
       <WorkAdventure />
-      
       <Portfolio />
-      
-      <Contato whatsappUrl={whatsappUrl} />
+      <Contato />
 
       {/* Botão Flutuante do WhatsApp */}
       <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="fixed bottom-6 right-6 z-50 bg-[#25D366] hover:bg-[#20ba5a] text-white p-4 rounded-full shadow-2xl transition-all transform hover:scale-110 flex items-center justify-center">
