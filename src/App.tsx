@@ -7,9 +7,9 @@ function App() {
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
 
   // --- CONFIGURAÇÃO DO EMAILJS ---
-  const EMAILJS_SERVICE_ID = "seu_service_id_aqui";
-  const EMAILJS_TEMPLATE_ID = "seu_template_id_aqui";
-  const EMAILJS_PUBLIC_KEY = "sua_public_key_aqui";
+  const EMAILJS_SERVICE_ID = "service_6v8pwkm";
+  const EMAILJS_TEMPLATE_ID = "template_lsbrfy5";
+  const EMAILJS_PUBLIC_KEY = "V_itfpQZbqLUEdwhU";
   // -------------------------------
 
   const form = useRef<HTMLFormElement>(null);
