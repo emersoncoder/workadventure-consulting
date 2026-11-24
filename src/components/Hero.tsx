@@ -1,9 +1,9 @@
-import { motion } from 'framer-motion';
+import { motion, type Variants } from 'framer-motion';
 import { BotaoMagnetico } from './BotaoMagnetico';
 
 export function Hero() {
   // Configuração da animação letra por letra
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: (i = 1) => ({
       opacity: 1,
@@ -11,7 +11,7 @@ export function Hero() {
     }),
   };
 
-  const childVariants = {
+  const childVariants: Variants = {
     visible: {
       opacity: 1,
       y: 0,
@@ -35,6 +35,8 @@ export function Hero() {
   // Texto que será animado letra por letra
   const text = "Olá, eu sou o";
   const letters = Array.from(text);
+
+  
 
   return (
     <main id="inicio" className="flex items-start pt-32 pb-4 px-6">
