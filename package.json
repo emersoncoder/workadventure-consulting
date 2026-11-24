@@ -15,7 +15,8 @@
     "framer-motion": "^14.14.0",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
-    "tailwindcss": "^4.3.5"
+    "tailwindcss": "^4.3.5",
+    "typewriter-effect": "^3.3.0"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
