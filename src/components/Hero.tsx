@@ -1,7 +1,9 @@
 import { motion, type Variants } from 'framer-motion';
 import { BotaoMagnetico } from './BotaoMagnetico';
+import { useLanguage } from '../i18n/useLanguage';
 
 export function Hero() {
+  const { language, dictionary } = useLanguage();
   // Configuração da animação letra por letra
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -33,10 +35,8 @@ export function Hero() {
   };
 
   // Texto que será animado letra por letra
-  const text = "Olá, eu sou o";
+  const text = dictionary.hero.greeting;
   const letters = Array.from(text);
-
-  
 
   return (
     <main id="inicio" className="flex items-start pt-32 pb-4 px-6">
@@ -51,7 +51,10 @@ export function Hero() {
         >
           <div className="absolute inset-0 bg-gradient-to-tr from-amber-500/20 via-slate-700/20 to-cyan-500/20 blur-3xl rounded-full w-full h-full m-auto"></div>
           <div className="relative z-10 p-[3px] rounded-3xl bg-gradient-to-b from-slate-600 via-slate-700 to-slate-900 shadow-2xl shadow-black/60 w-full max-w-3xl">
-            <img src="/eu.png" alt="Emerson" className="w-full h-auto object-cover rounded-[1.3rem] border border-slate-800" />
+            <picture>
+              <source srcSet="/eu.webp" type="image/webp" />
+              <img src="/eu.png" alt={dictionary.hero.imageAlt} width="1254" height="1254" fetchPriority="high" className="w-full h-auto object-cover rounded-[1.3rem] border border-slate-800" />
+            </picture>
           </div>
         </motion.div>
 
@@ -65,7 +68,7 @@ export function Hero() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="inline-block mb-4 px-4 py-1.5 rounded-full bg-slate-800 border border-slate-700 text-amber-400 text-sm font-semibold tracking-wide"
           >
-            Desenvolvedor & Especialista WorkAdventure
+            {dictionary.hero.eyebrow}
           </motion.div>
 
           {/* Título com Animação Letra por Letra */}
@@ -90,7 +93,7 @@ export function Hero() {
               transition={{ duration: 0.8, delay: 0.8, type: "spring" }}
               className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-emerald-400 to-cyan-400 bg-[length:200%_auto] animate-gradient mt-2"
             >
-              Emerson
+              {dictionary.hero.name}
             </motion.span>
           </h1>
 
@@ -101,8 +104,16 @@ export function Hero() {
             transition={{ duration: 0.6, delay: 1.2 }}
             className="text-lg text-slate-400 mb-10 leading-relaxed max-w-lg lg:max-w-none"
           >
-            Ajudo empresas, eventos e universidades a criarem experiências imersivas e inesquecíveis através do metaverso 2D com o WorkAdventure.
+            {dictionary.hero.intro}
           </motion.p>
+          <div className="mb-8 grid w-full grid-cols-3 gap-3">
+            {dictionary.hero.stats.map(({ value, label }) => (
+              <div key={label} className="rounded-xl border border-slate-800 bg-slate-950/60 px-3 py-4">
+                <strong className="block text-lg text-amber-400">{value}</strong>
+                <span className="mt-1 block text-xs leading-tight text-slate-400">{label}</span>
+              </div>
+            ))}
+          </div>
           
           {/* Botões */}
           <motion.div 
@@ -116,12 +127,12 @@ export function Hero() {
               href="#contato" 
               className="bg-amber-600 hover:bg-amber-500 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all shadow-xl shadow-amber-600/30 text-center"
             >
-              Contratar Consultoria
+              {dictionary.hero.contact}
             </BotaoMagnetico>
             
             {/* Botão Secundário */}
-            <a href="/curriculo.pdf" target="_blank" rel="noopener noreferrer" className="border border-slate-700 hover:border-amber-500/50 bg-slate-800/50 hover:bg-slate-800 text-slate-300 px-8 py-4 rounded-full text-lg font-semibold transition-all flex items-center justify-center gap-2 group">
-              Baixar Currículo
+            <a href={language === 'en' ? '/curriculo-en.pdf' : '/curriculo.pdf'} target="_blank" rel="noopener noreferrer" className="border border-slate-700 hover:border-amber-500/50 bg-slate-800/50 hover:bg-slate-800 text-slate-300 px-8 py-4 rounded-full text-lg font-semibold transition-all flex items-center justify-center gap-2 group">
+              {dictionary.hero.resume}
               <svg className="w-5 h-5 group-hover:translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
             </a>
           </motion.div>

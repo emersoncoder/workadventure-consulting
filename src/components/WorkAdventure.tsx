@@ -1,7 +1,9 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
+import { useLanguage } from '../i18n/useLanguage';
 
 export function WorkAdventure() {
+  const { dictionary } = useLanguage();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
@@ -13,20 +15,16 @@ export function WorkAdventure() {
           animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl md:text-5xl font-bold mb-6">O que é o <span className="text-cyan-400">WorkAdventure?</span></h2>
+          <h2 className="text-3xl md:text-5xl font-bold mb-6">{dictionary.work.title} <span className="text-cyan-400">WorkAdventure?</span></h2>
           <p className="text-slate-400 text-lg mb-6 leading-relaxed">
-            É uma plataforma Open Source que cria um metaverso 2D interativo no seu navegador. Imagine um escritório virtual ou um estande de eventos onde as pessoas caminham com avatares e, ao se aproximarem, a câmera e o microfone se conectam automaticamente.
+            {dictionary.work.description}
           </p>
           <ul className="space-y-4 mb-8">
-            <li className="flex items-center gap-3 text-slate-300">
-              <span className="text-amber-500 font-bold">✓</span> Integração nativa com Videochamadas
-            </li>
-            <li className="flex items-center gap-3 text-slate-300">
-              <span className="text-amber-500 font-bold">✓</span> Redução da fadiga de reuniões no Zoom
-            </li>
-            <li className="flex items-center gap-3 text-slate-300">
-              <span className="text-amber-500 font-bold">✓</span> Sensação real de networking e imersão
-            </li>
+            {dictionary.work.highlights.map((highlight) => (
+              <li key={highlight} className="flex items-center gap-3 text-slate-300">
+                <span className="text-amber-500 font-bold">✓</span> {highlight}
+              </li>
+            ))}
           </ul>
         </motion.div>
         
@@ -36,8 +34,20 @@ export function WorkAdventure() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="aspect-video bg-slate-900 rounded-2xl border border-slate-800 flex items-center justify-center relative overflow-hidden shadow-2xl"
         >
-            <div className="absolute inset-0 bg-gradient-to-tr from-amber-500/10 to-transparent"></div>
-            <span className="text-slate-500 z-10 text-center px-4">Coloque um GIF ou Vídeo<br/>do WorkAdventure aqui</span>
+            <img
+              src="/capa.webp"
+              alt={dictionary.work.imageAlt}
+              width="800"
+              height="800"
+              loading="lazy"
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent"></div>
+            <div className="absolute bottom-6 left-6 right-6 z-10 text-left">
+              <span className="rounded-full border border-cyan-400/30 bg-slate-950/80 px-3 py-1 text-xs font-semibold text-cyan-300">
+                {dictionary.work.badge}
+              </span>
+            </div>
         </motion.div>
       </div>
     </section>

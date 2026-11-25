@@ -1,4 +1,12 @@
+import { useState } from 'react';
+import { useLanguage } from '../i18n/useLanguage';
+
 export function Navbar() {
+  const { language, setLanguage, dictionary } = useLanguage();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const closeMenu = () => setIsMenuOpen(false);
+
   return (
     <header className="fixed w-full top-0 z-50">
       {/* Top Bar com Redes Sociais (Fica oculta no celular para não poluir) */}
@@ -41,18 +49,73 @@ export function Navbar() {
       <nav className="bg-slate-900/90 backdrop-blur-md border-b border-slate-800">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
           <div className="text-xl font-bold tracking-wider text-white">
-            Emerson<span className="text-amber-500">Devel</span>
-          </div>
-          <div className="hidden md:flex space-x-6 items-center">
-            <a href="#inicio" className="text-sm font-medium hover:text-amber-400 transition-colors">Início</a>
-            <a href="#portfolio" className="text-sm font-medium hover:text-amber-400 transition-colors">Portfólio</a>
-            <a href="#servicos" className="text-sm font-medium hover:text-amber-400 transition-colors">Serviços</a>
-            <a href="#workadventure" className="text-sm font-medium hover:text-amber-400 transition-colors">WorkAdventure</a>
-            <a href="#contato" className="text-sm font-medium bg-amber-600 hover:bg-amber-500 text-white px-5 py-2 rounded-full transition-colors shadow-lg shadow-amber-600/20">
-              Fale Comigo
+            <a href="#inicio" aria-label={dictionary.nav.homeAria}>
+              Emerson<span className="text-amber-500">Devel</span>
             </a>
           </div>
+          <div className="hidden md:flex space-x-6 items-center">
+            <a href="#inicio" className="text-sm font-medium hover:text-amber-400 transition-colors">{dictionary.nav.home}</a>
+            <a href="#portfolio" className="text-sm font-medium hover:text-amber-400 transition-colors">{dictionary.nav.portfolio}</a>
+            <a href="#servicos" className="text-sm font-medium hover:text-amber-400 transition-colors">{dictionary.nav.services}</a>
+            <a href="#workadventure" className="text-sm font-medium hover:text-amber-400 transition-colors">{dictionary.nav.workAdventure}</a>
+            <a href="#contato" className="text-sm font-medium bg-amber-600 hover:bg-amber-500 text-white px-5 py-2 rounded-full transition-colors shadow-lg shadow-amber-600/20">
+              {dictionary.nav.contact}
+            </a>
+          </div>
+          <div className="flex items-center gap-1" aria-label={dictionary.nav.languageSelection}>
+            <button
+              type="button"
+              onClick={() => setLanguage('en')}
+              aria-label={dictionary.nav.english}
+              aria-pressed={language === 'en'}
+              title={dictionary.nav.english}
+              className={`rounded-md border px-2 py-1 text-xl leading-none transition-colors ${language === 'en' ? 'border-cyan-400/70 bg-cyan-400/10' : 'border-transparent opacity-65 hover:opacity-100'}`}
+            >
+              🇺🇸
+            </button>
+            <button
+              type="button"
+              onClick={() => setLanguage('pt')}
+              aria-label={dictionary.nav.portuguese}
+              aria-pressed={language === 'pt'}
+              title={dictionary.nav.portuguese}
+              className={`rounded-md border px-2 py-1 text-xl leading-none transition-colors ${language === 'pt' ? 'border-amber-400/70 bg-amber-400/10' : 'border-transparent opacity-65 hover:opacity-100'}`}
+            >
+              🇧🇷
+            </button>
+          </div>
+          <button
+            type="button"
+            className="md:hidden rounded-lg border border-slate-700 p-2 text-slate-200"
+            aria-label={isMenuOpen ? dictionary.nav.closeMenu : dictionary.nav.openMenu}
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-navigation"
+            onClick={() => setIsMenuOpen((isOpen) => !isOpen)}
+          >
+            {isMenuOpen ? (
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                <path d="M6 6l12 12M18 6L6 18" />
+              </svg>
+            ) : (
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                <path d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            )}
+          </button>
         </div>
+        {isMenuOpen && (
+          <div id="mobile-navigation" className="md:hidden border-t border-slate-800 bg-slate-950 px-6 py-4">
+            <div className="flex flex-col space-y-4">
+              <a href="#inicio" onClick={closeMenu} className="text-sm font-medium hover:text-amber-400 transition-colors">{dictionary.nav.home}</a>
+              <a href="#portfolio" onClick={closeMenu} className="text-sm font-medium hover:text-amber-400 transition-colors">{dictionary.nav.portfolio}</a>
+              <a href="#servicos" onClick={closeMenu} className="text-sm font-medium hover:text-amber-400 transition-colors">{dictionary.nav.services}</a>
+              <a href="#workadventure" onClick={closeMenu} className="text-sm font-medium hover:text-amber-400 transition-colors">{dictionary.nav.workAdventure}</a>
+              <a href="#contato" onClick={closeMenu} className="text-sm font-medium bg-amber-600 hover:bg-amber-500 text-white px-5 py-3 rounded-full transition-colors text-center">
+                {dictionary.nav.contact}
+              </a>
+            </div>
+          </div>
+        )}
       </nav>
     </header>
   );
